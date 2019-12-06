@@ -273,7 +273,7 @@ def verbose_reports(**kwargs):
     combinations = math.pow(2, int(entropy)) / 1000
     time_taken = craking_time(combinations)
     
-    print "Estimated time to crack this passphrase (at 1,000 guesses per second): %s\n" % time_taken
+    print("Estimated time to crack this passphrase (at 1,000 guesses per second): %s\n" % time_taken)
 
 def generate_passphrase(adjectives, nouns, verbs, separator):
     return "{0}{s}{1}{s}{2}{s}{3}{s}{4}".format(
@@ -314,21 +314,26 @@ def passphrase(adjectives, nouns, verbs, separator, num=1,
     return all_phrases
 
 
+def here(filename):
+    script_dir = os.path.dirname(os.path.realpath(__file__))
+    return os.path.join(script_dir, filename)
+
+
 if __name__ == "__main__":
 
     usage = "usage: %prog [options]"
     parser = optparse.OptionParser(usage)
     
     parser.add_option("--adjectives", dest="adjectives",
-                      default=None,
+                      default=here('adjectives.txt'),
                       help="List of valid adjectives for passphrase")
                       
     parser.add_option("--nouns", dest="nouns",
-                      default=None,
+                      default=here('nouns.txt'),
                       help="List of valid nouns for passphrase")
                       
     parser.add_option("--verbs", dest="verbs",
-                      default=None,
+                      default=here('verbs.txt'),
                       help="List of valid verbs for passphrase")
     
     parser.add_option("-s", "--separator", dest="separator",
